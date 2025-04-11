@@ -13,13 +13,13 @@
             height: 100vh;
             background-color: #f4f4f4;
             margin: 0;
+            overflow: hidden;
         }
 
         .letter-container {
-            width: 300px;
-            height: 300px;
+            width: 80%;
+            max-width: 500px;
             position: relative;
-            overflow: hidden;
             cursor: pointer;
         }
 
@@ -35,20 +35,34 @@
 
         .envelope {
             background: url('envelope.jpg') no-repeat center center;
-            background-size: cover;
+            background-size: contain; /* Change to contain */
             transform: translateX(0);
         }
 
         .letter-recto {
             background: url('recto.jpg') no-repeat center center;
-            background-size: cover;
+            background-size: contain; /* Change to contain */
             transform: translateX(100%);
         }
 
         .letter-verso {
             background: url('verso.jpg') no-repeat center center;
-            background-size: cover;
+            background-size: contain; /* Change to contain */
             transform: translateX(200%);
+        }
+
+        /* Réactivité pour petits écrans */
+        @media (max-width: 600px) {
+            .letter-container {
+                width: 90%;
+            }
+        }
+
+        /* Pour les grands écrans */
+        @media (min-width: 601px) {
+            .letter-container {
+                width: 60%;
+            }
         }
     </style>
 </head>
@@ -70,17 +84,14 @@
             flipCount++; // Incrémente à chaque clic
 
             if (flipCount === 1) {
-                // Premier clic : Déplace l'enveloppe à gauche pour révéler le recto
                 envelope.style.transform = 'translateX(-100%)';
                 recto.style.transform = 'translateX(0)';
             } else if (flipCount === 2) {
-                // Deuxième clic : Déplace le recto à gauche pour montrer le verso
                 recto.style.transform = 'translateX(-100%)';
                 verso.style.transform = 'translateX(0)';
             } else if (flipCount === 3) {
-                // Troisième clic : Réinitialisation pour recommencer
                 verso.style.transform = 'translateX(100%)';
-                flipCount = 0; // Réinitialisation du compteur
+                flipCount = 0;
             }
         }
     </script>
