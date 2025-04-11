@@ -16,8 +16,9 @@
         }
 
         .letter-container {
-            width: 300px;
-            height: 300px;
+            width: 80%;  /* Largeur adaptable */
+            max-width: 500px;  /* Limite la taille sur grands écrans */
+            height: auto;
             position: relative;
             overflow: hidden;
             cursor: pointer;
@@ -49,6 +50,24 @@
             background: url('verso.jpg') no-repeat center center;
             background-size: cover;
             transform: translateX(200%);
+        }
+
+        /* Réactivité pour petits écrans (comme les téléphones) */
+        @media (max-width: 600px) {
+            .letter-container {
+                width: 90%;  /* Prend un peu plus de place sur les petits écrans */
+            }
+
+            .letter-recto, .letter-verso, .envelope {
+                background-size: contain;  /* Assure que l'image ne dépasse pas la taille du conteneur */
+            }
+        }
+
+        /* Réduction de la taille des images sur grands écrans */
+        @media (min-width: 601px) {
+            .letter-container {
+                width: 60%;  /* Laisse plus de marge sur les grands écrans */
+            }
         }
     </style>
 </head>
