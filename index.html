@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitation Inauguration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+
+        .letter-container {
+            width: 300px;
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .envelope, .letter {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            backface-visibility: hidden;
+            transition: transform 1s ease-out;
+        }
+
+        .envelope {
+            background: url('envelope.jpg') no-repeat center center;
+            background-size: cover;
+            transform: translateX(0);
+        }
+
+        .letter-recto {
+            background: url('recto.jpg') no-repeat center center;
+            background-size: cover;
+            transform: translateX(100%);
+        }
+
+        .letter-verso {
+            background: url('verso.jpg') no-repeat center center;
+            background-size: cover;
+            transform: translateX(200%);
+        }
+    </style>
+</head>
+<body>
+    <div class="letter-container" onclick="flipLetter()">
+        <div class="envelope"></div> <!-- Enveloppe -->
+        <div class="letter letter-recto"></div> <!-- Recto -->
+        <div class="letter letter-verso"></div> <!-- Verso -->
+    </div>
+
+    <script>
+        let flipCount = 0;
+
+        function flipLetter() {
+            const envelope = document.querySelector('.envelope');
+            const recto = document.querySelector('.letter-recto');
+            const verso = document.querySelector('.letter-verso');
+
+            flipCount++; // Incrémente à chaque clic
+
+            if (flipCount === 1) {
+                // Premier clic : Déplace l'enveloppe à gauche pour révéler le recto
+                envelope.style.transform = 'translateX(-100%)';
+                recto.style.transform = 'translateX(0)';
+            } else if (flipCount === 2) {
+                // Deuxième clic : Déplace le recto à gauche pour montrer le verso
+                recto.style.transform = 'translateX(-100%)';
+                verso.style.transform = 'translateX(0)';
+            } else if (flipCount === 3) {
+                // Troisième clic : Réinitialisation pour recommencer
+                verso.style.transform = 'translateX(100%)';
+                flipCount = 0; // Réinitialisation du compteur
+            }
+        }
+    </script>
+</body>
+</html>
